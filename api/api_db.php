@@ -3,6 +3,8 @@
 class db{
     private $dbarray;
     function db(){
+
+        global $dbarray;
         $dbFile = file("db.txt");
         $dbarray = array();
 
@@ -12,7 +14,7 @@ class db{
     }
 
     public function getdbarray(){
-        return $dbarray;
+        return $GLOBALS['dbarray'];
     }
 }
 
