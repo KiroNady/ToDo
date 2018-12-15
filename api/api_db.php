@@ -1,15 +1,19 @@
 <?php 
 
+class db{
+    private $dbarray;
+    function db(){
+        $dbFile = file("db.txt");
+        $dbarray = array();
 
-function db(){
-    $dbFile = file("db.txt");
-
-    $dbarray = array();
-    foreach($dbFile as $num => $line){
-        $dbarray[$num] = $line;
+        foreach($dbFile as $num => $line){
+            $dbarray[$num] = $line;
+        }
     }
-    return $dbarray;
-}
 
+    public function getdbarray(){
+        return $dbarray;
+    }
+}
 
 ?>

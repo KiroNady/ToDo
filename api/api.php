@@ -1,11 +1,13 @@
 <?php
 
-include 'api_db.php';
+require 'api_db.php';
 //echo "welcome";
 
 //echo $_SERVER['PATH_INFO'];
-$dbarr = db();
 
+$dbarr = new db();
+print_r($dbarr->getdbarray());
+/*
 $method = $_SERVER['REQUEST_METHOD'];
 //print_r($_SERVER);
 
@@ -18,7 +20,7 @@ if ($req == "/home" and $method == 'GET'){
 else {
     
 }
-
+*/
 
 
 ?>
