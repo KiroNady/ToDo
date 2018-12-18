@@ -10,7 +10,6 @@ $db = new db();
 $result = rtrim($req, '/');
 
 
-
 if ($req == '/home' and $method == 'GET' ){
     global $db;
     $db->getdb();
@@ -25,9 +24,15 @@ elseif ($req == '/add' ){
     echo "done";
 }
 
-elseif (preg_match('/(\/home)(\/Task)(?<digit>\d+)/' ,$req , $matches)){
+elseif (preg_match('/(\/home)(\/task)(?<digit>\d+)/' ,$req , $matches)){
     global $db;
-    $db->ViewTask($matches[3]);
+    if ($method == 'GET'){
+        $db->ViewTask($matches[3]);
+    }
+    elseif ($method == "DELETE"){
+        $db->delElement($matches[3]);
+    }
 }
+
 
 ?>
