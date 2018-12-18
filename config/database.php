@@ -22,8 +22,9 @@ class db{
         $sql = "select * from Tasks";
         $res = $mysqli->query($sql);
         if ($res->num_rows > 0){
-            while ($row = $res->fetch_assoc()){
-                print_r($row);
+            for ($i = 0; $i < $res->num_rows ; $i++){
+                //print_r($row);
+                echo json_encode(mysqli_fetch_object($res));
                 echo "<br>\n";
                 
 
@@ -32,11 +33,12 @@ class db{
         
 
     }
-    function addNewElement($task , $taskDes = NULL){
+    function addNewElement($task){
         global $mysqli;
 
+        
         $sql = "insert into Tasks (taskName , taskDes)
-        VALUES( '$task' , '$taskDes'); "; 
+        VALUES( '" . $task->taskName . "' , '" . $task->taskDes ."'); "; 
 
         if ($mysqli->query($sql) === true){
             echo "element added <br>\n";
@@ -76,15 +78,14 @@ class db{
     }
     function ViewTask($id){
         global $mysqli;
+        
 
         $sql = "select * from Tasks where id = $id";
 
         $res = $mysqli->query($sql);
         if ($res->num_rows > 0){
-            while ($row = $res->fetch_assoc()){
-                print_r($row);
-                echo "<br>\n";
-            }
+            echo json_encode(mysqli_fetch_object($res));
+            echo "<br>\n";
         }
     }
 }
