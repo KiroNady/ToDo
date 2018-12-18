@@ -20,13 +20,16 @@ class db{
         global $mysqli;
 
         $sql = "select * from Tasks";
+        $res = $mysqli->query($sql);
+        if ($res->num_rows > 0){
+            while ($row = $res->fetch_assoc()){
+                print_r($row);
+                echo "<br>\n";
+                
 
-        if ($mysqli->query($sql)) {
-            echo "<br>\n";
+            }
         }
-        else {
-            echo "Error: ". $mysqli->error . "<br>\n ";
-        }
+        
 
     }
     function addNewElement($task , $taskDes = NULL){
@@ -75,18 +78,15 @@ class db{
         global $mysqli;
 
         $sql = "select * from Tasks where id = $id";
-        
-        print_r ($mysqli->query($sql)); 
-        if ($mysqli->query($sql) === true){
-            echo "<br>\n";
-        } 
-        else {
-            echo "Error : ". $mysqli->error . "\n";
-        } 
+
+        $res = $mysqli->query($sql);
+        if ($res->num_rows > 0){
+            while ($row = $res->fetch_assoc()){
+                print_r($row);
+                echo "<br>\n";
+            }
+        }
     }
-
-    
-
 }
 ?>
 
