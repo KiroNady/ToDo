@@ -1,7 +1,7 @@
 <?php
 
 require 'api_db.php';
-require '../config/database.php';
+require './config/database.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 $req = $_SERVER['REQUEST_URI'];
