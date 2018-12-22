@@ -2,10 +2,14 @@
 
 require 'api_db.php';
 require './config/database.php';
+require './config/pgDB.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 $req = $_SERVER['REQUEST_URI'];
 $db = new db();
+echo "beginnig\n";
+$psql = new pg();
+echo "\nend\n";
 
 $result = rtrim($req, '/');
 
