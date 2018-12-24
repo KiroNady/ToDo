@@ -7,11 +7,6 @@ class pg{
         global $pg;
         echo "<br> hi <br>";
         $pg = pg_connect(getenv("DATABASE_URL"));
-        echo pg_port();
-        
-        
-        echo pg_host();
-        
         //create new user if it doesn't exist already 
         $users = pg_query("select usename from  pg_catalog.pg_user");
         $users = pg_fetch_all_columns($users);
