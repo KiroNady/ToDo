@@ -10,6 +10,11 @@ $db = new db();
 echo "beginnig\n";
 $psql = new pg();
 echo "\nend\n";
+$psql->GetTable();
+//$psql->addNewElement(array('taskname'=> 'task' , 'taskdes'=>'des',));
+$psql->getAll();
+die();
+$psql->getdb();
 
 $result = rtrim($req, '/');
 
