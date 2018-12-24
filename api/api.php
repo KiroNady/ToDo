@@ -9,10 +9,10 @@ echo "beginnig\n";
 $psql = new pg();
 echo "\nend\n";
 $psql->GetTable();
-//$psql->addNewElement(array('taskname'=> 'task' , 'taskdes'=>'des',));
+$psql->addNewElement(array('taskname'=> 'task' , 'taskdes'=>'des',));
 $psql->getAll();
 die();
-$psql->getdb();
+/*$psql->getdb();
 
 $result = rtrim($req, '/');
 
@@ -40,6 +40,6 @@ elseif (preg_match('/(\/home)(\/task)(?<digit>\d+)/' ,$req , $matches)){
         $db->delElement($matches[3]);
     }
 }
-
+*/
 
 ?>

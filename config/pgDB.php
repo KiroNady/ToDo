@@ -19,7 +19,7 @@ class pg{
         $dbs = pg_fetch_all_columns($dbs);
 
         if (!in_array("tasks" , $dbs)){
-            pg_query($pg , "create database tasks");
+            pg_query($pg , "create database tasks OWNER = todo");
         }
 
         //connect to the database
@@ -32,7 +32,8 @@ class pg{
         global $pg;
 
         $tables = pg_query($pg , "select * from pg_catalog.pg_Tables where tableowner='todo';");
-        $tables = pg_fetch_all($tables);
+        $tables = pg_fetch_all_columns($tables);
+        
         if ($tables == 0){
             pg_query($pg , "create table taskstb(
                 id SERIAL
