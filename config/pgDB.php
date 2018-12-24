@@ -25,6 +25,8 @@ class pg{
 
         //connect to the database
         pg_connect ("dbname=tasks");
+
+        echo pg_dbname();
     }
 
     function GetTable(){
