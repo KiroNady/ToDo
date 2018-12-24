@@ -5,9 +5,11 @@ class pg{
 
     function pg(){
         global $pg;
+        echo "<br> hi <br>";
+        $pg = pg_connect() ;
         echo pg_port();
         
-        $pg = pg_connect( ) ;
+        
         echo pg_host();
         
         //create new user if it doesn't exist already 
