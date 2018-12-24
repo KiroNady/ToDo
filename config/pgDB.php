@@ -6,7 +6,7 @@ class pg{
     function pg(){
         global $pg;
         echo "<br> hi <br>";
-        $pg = pg_connect() ;
+        $pg = pg_connect(getenv("DATABASE_URL"));
         echo pg_port();
         
         
