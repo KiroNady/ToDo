@@ -6,7 +6,9 @@ class pg{
     function pg(){
         global $pg;
         
-        $pg = pg_connect("user=default password= options='--client_encoding=UTF8'" );
+        $pg = pg_connect("user=default password= options='--client_encoding=UTF8'" ) ;
+        echo pg_last_error($pg);
+        echo pg_host();
         
         //create new user if it doesn't exist already 
         $users = pg_query("select usename from  pg_catalog.pg_user");
