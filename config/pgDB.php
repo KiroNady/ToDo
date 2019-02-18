@@ -85,15 +85,17 @@ class pg{
         global $pg;
     }
 
-    function sortBy($column){
+    function getSortBy($column , $label){
         global $pg;
-        $res = pg_fetch_all(pg_query($pg , "select * from taskstb ORDER BY $column"));
-        echo json_encode($res);
-    }
-
-    function getby($label){
-        global $pg;
-        $res =  pg_fetch_all(pg_query($pg , "select * from taskstb where label = $label"));
+        if ($column == NULL){
+            $column = 'id';
+        }
+        if ($label == NULL){
+            $res = pg_fetch_all(pg_query($pg , "select * from taskstb ORDER BY $column"));
+        }
+        else{
+            $res = pg_fetch_all(pg_query($pg , "select * from taskstb where label = $label ORDER BY $column"));
+        }
         echo json_encode($res);
     }
 }

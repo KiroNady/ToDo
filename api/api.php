@@ -54,12 +54,13 @@ else{
     $query = parse_url($req,PHP_URL_QUERY);
     if ($query != NULL){
         $queries = extractQuery($query);
-        if (in_array('sortBy', array_keys($queries) )){
-            $psql->sortBy($queries['sortBy']);
+        if (!in_array('sortBy' , $queries)){
+            $queries['sortBy'] = NULL;
         }
-        if (in_array('label' ,  array_keys($queries))){
-            $psql->getBy($queries['label']);
+        if (!in_array('label' , $queries)){
+            $queries['label'] = NULL;
         }
+        $psql->getSortBy($queries['sortBy'] , $queries['label']);
     }
 }
 
