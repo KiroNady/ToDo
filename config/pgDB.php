@@ -5,8 +5,8 @@ class pg{
 
     function pg(){
         global $pg;
-        echo "<br> hi <br>";
         $pg = pg_connect(getenv("DATABASE_URL"));
+
         //create new user if it doesn't exist already 
         $users = pg_query("select usename from  pg_catalog.pg_user");
         $users = pg_fetch_all_columns($users);
@@ -17,7 +17,6 @@ class pg{
         //create the database if it does'nt exist
         $dbs = pg_query($pg , "select datname from pg_database" );
         $dbs = pg_fetch_all_columns($dbs);
-
         if (!in_array("tasks" , $dbs)){
             pg_query($pg , "create database tasks OWNER = todo");
         }
@@ -25,10 +24,9 @@ class pg{
         //connect to the database
         pg_connect ("dbname=tasks");
 
-        echo pg_dbname();
     }
 
-    function GetTable(){
+    function CreateTable(){
         global $pg;
 
         $tables = pg_query($pg , "select * from pg_catalog.pg_Tables where tableowner='todo';");
@@ -55,12 +53,6 @@ class pg{
         }
     }
 
-    function getdb(){
-        global $pg;
-
-        
-
-    }
     function addNewElement($task){
         global $pg;
         pg_query($pg , "insert into taskstb (taskname , taskdes)
@@ -69,12 +61,41 @@ class pg{
     }
     function getAll(){
         global $pg;
-        print_r(pg_fetch_all(pg_query($pg , "select * from taskstb")));
+        $result = pg_fetch_all(pg_query($pg , "select * from taskstb"));
+        $json = json_encode($result);
+        echo "$json";
     }
     
+    function getOneElement($taskId){
+        echo "in";
+        global $pg;
+        print_r(pg_fetch_all(pg_query($pg , "select * from taskstb where id = $taskId")));
+
+    }
     
+    function delElement($taskId){
+        global $pg;
+        $sql = pg_query($pg , "delete from Tasks where id = $taskId");
+        if (!$sql === false){
+            echo "element deleted";
+        }
+    }
+    
+    function updateElement($taskId){
+        global $pg;
+    }
 
+    function sortBy($column){
+        global $pg;
+        $res = pg_fetch_all(pg_query($pg , "select * from taskstb ORDER BY $column"));
+        echo json_encode($res);
+    }
 
+    function getby($label){
+        global $pg;
+        $res =  pg_fetch_all(pg_query($pg , "select * from taskstb where label = $label"));
+        echo json_encode($res);
+    }
 }
 
 

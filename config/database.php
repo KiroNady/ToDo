@@ -6,19 +6,15 @@ class db{
     function db(){
         global $mysqli;
         $mysqli = new mysqli("127.0.0.1" , "todoapp" , "ToDoApp");
-
         if ($mysqli->connect_error){
             die("connection failed: " . $mysqli->connect_error);
         }
         $mysqli->select_db("Tasks") or die("unable to open database");
         echo "connected successfully <br>\n";
-        
-        
     }
 
     function getdb(){
         global $mysqli;
-
         $sql = "select * from Tasks";
         $res = $mysqli->query($sql);
         if ($res->num_rows > 0){
@@ -26,12 +22,8 @@ class db{
                 //print_r($row);
                 echo json_encode(mysqli_fetch_object($res));
                 echo "<br>\n";
-                
-
             }
         }
-        
-
     }
     function addNewElement($task){
         global $mysqli;
@@ -50,9 +42,7 @@ class db{
 
     function delElement( $id){
         global $mysqli;
-
         $sql = "delete from Tasks where id = $id";
-
         if ($mysqli->query($sql) === true){
             echo "element deleted! <br>\n";
         }
@@ -68,7 +58,6 @@ class db{
         taskDes text,
         date TIMESTAMP, 
         category text)";
-
         if ($mysqli->query($sql) === true){
             echo "table created successfully \n";
         }
@@ -76,12 +65,10 @@ class db{
             echo "Error: ". $mysqli->error . "\n";
         }
     }
+
     function ViewTask($id){
         global $mysqli;
-        
-
         $sql = "select * from Tasks where id = $id";
-
         $res = $mysqli->query($sql);
         if ($res->num_rows > 0){
             echo json_encode(mysqli_fetch_object($res));
