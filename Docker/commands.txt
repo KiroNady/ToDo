@@ -1,0 +1,8 @@
+//to get detailed info 
+docker info 
+
+
+// to avoid root problems create a group and add a user
+sudo groupadd docker
+sudo usermod -aG docker $USER
+
